@@ -37,8 +37,8 @@ The goal is to strengthen backend skills including routing, database integration
 
 ```bash
 # Clone this repository
-git clone https://github.com/your-username/shoe-store-backend.git
-cd shoe-store-backend
+git clone https://github.com/Solanki-rudra/scatch.git
+cd scatch
 
 # Install dependencies
 npm install
