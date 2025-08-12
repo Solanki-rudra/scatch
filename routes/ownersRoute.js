@@ -6,8 +6,6 @@ Router.get('/', (req, res) => {
     res.send('Welcome to the owners API!');
 });
 
-console.log('ENV:', process.env.ENV);
-
 if (process.env.ENV === 'development') {
     Router.post('/create', async (req, res) => {
         try {
