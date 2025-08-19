@@ -29,4 +29,22 @@ const registerUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser }
+const loginUser = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const user = await userModel.findOne({email})
+        if (!user) return res.status(400).send('User not found')
+        const isPasswordValid = await bcrypt.compare(password, user.password)
+        if (!isPasswordValid) return res.status(400).send('Invalid password')
+        const token = generateToken(user)
+        res.cookie('token', token)
+        res.send('User logged in successfully')
+    } catch (error) {
+        res.send({
+            message: 'Error logging in user',
+            error: error.message
+        })
+    }
+}
+
+module.exports = { registerUser, loginUser }
