@@ -47,4 +47,9 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser }
+const logoutUser = (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/login');
+}
+
+module.exports = { registerUser, loginUser, logoutUser }

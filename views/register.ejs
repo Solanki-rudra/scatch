@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md bg-gray-800 p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-bold text-white text-center mb-6">Create Account</h2>
+
+        <form action="/register" method="POST" class="space-y-5">
+            <!-- Full Name -->
+            <div>
+                <label for="fullname" class="block text-sm font-medium text-gray-300">Full Name</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required
+                    class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-green-500 focus:outline-none" />
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required
+                    class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-green-500 focus:outline-none" />
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required
+                    class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-green-500 focus:outline-none" />
+            </div>
+
+            <!-- Submit -->
+            <button type="submit"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                Register
+            </button>
+        </form>
+
+        <!-- Extra links -->
+        <p class="text-gray-400 text-sm text-center mt-6">
+            Already have an account?
+            <a href="/login" class="text-green-400 hover:underline">Login</a>
+        </p>
+    </div>
+</body>
+
+</html>

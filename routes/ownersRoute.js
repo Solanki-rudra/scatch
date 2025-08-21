@@ -1,9 +1,14 @@
 const express = require('express');
 const ownerModel = require('../models/ownerModel');
+const { createProduct } = require('../controllers/ownerController');
 const Router = express.Router();
 
 Router.get('/', (req, res) => {
     res.send('Welcome to the owners API!');
+});
+
+Router.get('/create-product', (req, res) => {
+    res.render('createProduct');
 });
 
 if (process.env.ENV === 'development') {
