@@ -1,0 +1,88 @@
+<!-- views/cart.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 min-h-screen text-white p-8">
+
+    <!-- Header -->
+    <h1 class="text-3xl font-bold text-center mb-8">🛒 Your Cart</h1>
+
+    <% if (cart && cart.length> 0) { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% cart.forEach(function(item) { %>
+                <div class="rounded-xl shadow-lg overflow-hidden bg-gray-800">
+
+                    <!-- Image -->
+                    <div class="h-40 w-full flex items-center justify-center bg-gray-700">
+                        <img src="data:image/png;base64,<%= item.image.toString('base64') %>" alt="<%= item.name %>"
+                            class="object-contain h-full w-full">
+                    </div>
+
+                    <!-- Details -->
+                    <div class="p-4">
+                        <h2 class="text-lg font-semibold mb-2">
+                            <%= item.name %>
+                        </h2>
+
+                        <p class="mb-1">
+                            Price: <span class="font-bold">₹<%= item.price %></span>
+                        </p>
+
+                        <p class="mb-1">
+                            Quantity: <span class="font-bold">
+                                <%= item.quantity %>
+                            </span>
+                        </p>
+
+                        <p class="mb-2 text-green-400">
+                            Subtotal: ₹<%= (item.price * item.quantity).toFixed(2) %>
+                        </p>
+
+                        <!-- Actions -->
+                        <div class="flex justify-between mt-3">
+                            <form action="/cart/update/<%= item._id %>" method="POST">
+                                <button type="submit" name="action" value="increase"
+                                    class="bg-green-500 hover:bg-green-600 px-3 py-1 rounded">+</button>
+                                <button type="submit" name="action" value="decrease"
+                                    class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded">-</button>
+                            </form>
+
+                            <form action="/cart/remove/<%= item._id %>" method="POST">
+                                <button type="submit"
+                                    class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+
+        <!-- Cart Total -->
+        <div class="mt-8 bg-gray-800 p-6 rounded-lg shadow-md max-w-lg mx-auto">
+            <h2 class="text-2xl font-bold mb-4">Cart Summary</h2>
+            <p class="mb-2">Items: <%= cart.length %>
+            </p>
+            <p class="mb-4 text-xl">
+                Total:
+                <span class="font-bold text-green-400">
+                    ₹<%= cart.reduce((sum, item)=> sum + item.price * item.quantity, 0).toFixed(2) %>
+                </span>
+            </p>
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-lg">
+                Proceed to Checkout
+            </button>
+        </div>
+
+        <% } else { %>
+            <p class="text-center text-gray-400">Your cart is empty 🛍️</p>
+            <% } %>
+
+</body>
+
+</html>

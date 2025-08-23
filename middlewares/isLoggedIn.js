@@ -1,17 +1,20 @@
 const jwt = require('jsonwebtoken');
 
 const isLoggedIn = (req, res, next) => {
-    console.log(req.cookies)
-    if(!req.cookies?.token) {
-        return res.redirect('/login');
-    }
-    try {
-        let decodedToken = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
-        console.log(decodedToken);
-    } catch (error) {
-        res.redirect('/login');
-    }
+  const token = req.cookies?.token;
+
+  if (!token) {
+    return res.redirect('/login');
+  }
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decodedToken; // ✅ attach user data to request
     next();
-}
+  } catch (error) {
+    console.error("JWT verification failed:", error.message);
+    return res.redirect('/login');
+  }
+};
 
 module.exports = isLoggedIn;

@@ -6,10 +6,12 @@ const userSchema = new mongoose.Schema({
     fullname: String,
     email: String,
     password: String,
-    cart: {
-        type: Array,
-        default: []
-    },
+    cart: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }
+    ],
     orders: {
         type: Array,
         default: []

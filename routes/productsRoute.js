@@ -15,7 +15,6 @@ Router.get('/', async (req, res) => {
 Router.post('/create', upload.single('image'), async (req, res) => {
     const { name, price, discount, bgColor, panelColor, textColor } = req.body;
     const image = req.file ? req.file.buffer : null;
-    console.log(image);
     try {
         const product = await productModel.create({
             name,
